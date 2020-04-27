@@ -4,6 +4,6 @@ const HWCAP_SHA2: u64 = 64;
 
 #[inline(always)]
 pub fn sha2_supported() -> bool {
-    let hwcaps: u64 = unsafe { ::libc::getauxval(AT_HWCAP) };
+    let hwcaps: u64 = unsafe { libc::getauxval(AT_HWCAP) };
     (hwcaps & HWCAP_SHA2) != 0
 }

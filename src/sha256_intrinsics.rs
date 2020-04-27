@@ -1,3 +1,5 @@
+#![allow(clippy::cast_ptr_alignment)] // Safe to cast without alignment checks as the loads and stores do not require alignment.
+
 #[cfg(target_arch = "x86")]
 use core::arch::x86::*;
 #[cfg(target_arch = "x86_64")]
@@ -47,7 +49,7 @@ pub unsafe fn compress256(state: &mut [u32; 8], block: &[u8; 64]) {
         cdgh_save = state1;
 
         // Rounds 0-3
-        msg = _mm_loadu_si128(block.as_ptr().add(block_offset + 0) as *const __m128i);
+        msg = _mm_loadu_si128(block.as_ptr().add(block_offset) as *const __m128i);
         msg0 = _mm_shuffle_epi8(msg, MASK);
         msg = _mm_add_epi32(
             msg0,
