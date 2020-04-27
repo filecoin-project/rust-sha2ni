@@ -41,16 +41,12 @@ jobs:
           args: --release --features asm
 
   cross:
-    name: Cross compile
+    name: Arm Cross compile
     runs-on: ubuntu-latest
     strategy:
       matrix:
         target:
           - thumbv7em-none-eabi
-          - i686-unknown-linux-gnu
-          - powerpc-unknown-linux-gnu
-          - powerpc64-unknown-linux-gnu
-          - mips-unknown-linux-gnu
           - arm-linux-androideabi
 
     steps:
@@ -71,5 +67,34 @@ jobs:
     - name: test
       run: cross test --target ${{ matrix.target }}
       
-    - name: test
+    - name: test asm-aarch64
       run: cross test --features asm-aarch64 --target ${{ matrix.target }}
+
+  cross:
+    name: 32bit Cross compile
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - i686-unknown-linux-gnu
+          - powerpc-unknown-linux-gnu
+          - powerpc64-unknown-linux-gnu
+          - mips-unknown-linux-gnu
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install nightly
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        override: true
+
+    - name: Install cross
+      run: cargo install cross
+
+    - name: check
+      run: cross check --target ${{ matrix.target }}
+
+    - name: test
+      run: cross test --target ${{ matrix.target }}
