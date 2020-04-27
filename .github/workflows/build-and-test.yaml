@@ -40,7 +40,7 @@ jobs:
           command: test
           args: --release --features asm
 
-  cross:
+  cross_arm:
     name: Arm Cross compile
     runs-on: ubuntu-latest
     strategy:
@@ -70,7 +70,7 @@ jobs:
     - name: test asm-aarch64
       run: cross test --features asm-aarch64 --target ${{ matrix.target }}
 
-  cross:
+  cross_32bit:
     name: 32bit Cross compile
     runs-on: ubuntu-latest
     strategy:
