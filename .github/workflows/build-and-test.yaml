@@ -40,8 +40,8 @@ jobs:
           command: test
           args: --release --features asm
 
-  cross_nostd:
-    name: Cross compile for NoStd
+  test_nostd:
+    name: Test nostd
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -57,14 +57,11 @@ jobs:
         toolchain: nightly
         override: true
 
-    - name: Install cross
-      run: cargo install cross
+    - name: Install xargo
+      run: cargo install xargo
 
-    - name: check
-      run: cross check --no-default-features --target ${{ matrix.target }}
-
-    - name: test
-      run: cross test --no-default-features --target ${{ matrix.target }}
+    - name: build
+      run: xargo build --no-default-features --target ${{ matrix.target }}
           
   cross_arm:
     name: Arm Cross compile
@@ -72,7 +69,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - arm-linux-androideabi
+          - aarch64-unknown-linux-gnu
 
     steps:
     - uses: actions/checkout@v2
