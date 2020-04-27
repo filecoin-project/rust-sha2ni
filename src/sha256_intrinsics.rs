@@ -262,6 +262,6 @@ pub unsafe fn compress256(state: &mut [u32; 8], block: &[u8; 64]) {
     state1 = _mm_alignr_epi8(state1, tmp, 8); // ABEF
 
     // Save state
-    _mm_storeu_si128(state.as_ptr().add(0) as *mut __m128i, state0);
-    _mm_storeu_si128(state.as_ptr().add(4) as *mut __m128i, state1);
+    _mm_storeu_si128(state.as_mut_ptr().add(0) as *mut __m128i, state0);
+    _mm_storeu_si128(state.as_mut_ptr().add(4) as *mut __m128i, state1);
 }
