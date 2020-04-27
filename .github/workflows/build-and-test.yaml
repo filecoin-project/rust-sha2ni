@@ -40,13 +40,38 @@ jobs:
           command: test
           args: --release --features asm
 
+  cross_nostd:
+    name: Cross compile for NoStd
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - thumbv7em-none-eabi
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install nightly
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        override: true
+
+    - name: Install cross
+      run: cargo install cross
+
+    - name: check
+      run: cross check --no-default-features --target ${{ matrix.target }}
+
+    - name: test
+      run: cross test --no-default-features --target ${{ matrix.target }}
+          
   cross_arm:
     name: Arm Cross compile
     runs-on: ubuntu-latest
     strategy:
       matrix:
         target:
-          - thumbv7em-none-eabi
           - arm-linux-androideabi
 
     steps:
