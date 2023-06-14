@@ -11,7 +11,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         rust: [nightly, stable]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install latest ${{ matrix.rust }}
         uses: actions-rs/toolchain@v1
         with:
@@ -32,7 +32,7 @@ jobs:
   test_asm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Run cargo test asm
         uses: actions-rs/cargo@v1
@@ -49,7 +49,7 @@ jobs:
           - thumbv7em-none-eabi
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install nightly
       uses: actions-rs/toolchain@v1
@@ -72,7 +72,7 @@ jobs:
           - aarch64-unknown-linux-gnu
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install nightly
       uses: actions-rs/toolchain@v1
@@ -104,7 +104,7 @@ jobs:
           - mips-unknown-linux-gnu
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install nightly
       uses: actions-rs/toolchain@v1
