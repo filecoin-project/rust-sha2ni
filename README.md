@@ -11,6 +11,7 @@ https://docs.rs/sha2ni)
 > Sha2 implemention in Rust, aimed at performance. 
 > Forked from [Sha2](https://github.com/rustcrypto/hashes).
 
+This fork is no longer needed as the upstream [`sha2` crate](https://crates.io/crates/sha2) now supports the SHA-NI extension.
 
 ## License
 
